@@ -1,0 +1,49 @@
+﻿@model ShopTP22.Models.Products.ProductAdminEditViewModel
+
+
+<div>
+    <h1>Edit</h1>
+    <p>Product</p>
+
+    <dl class="row">
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group row">
+                <label asp-for="ListingName" class="form-label"></label>
+                <input asp-for="ListingName" class="form-control" />
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="ListingDescription" class="form-label"></label>
+                <textarea asp-for="ListingDescription" class="form-control"></textarea>
+            </div>
+                <div class="form-group row">
+                <label asp-for="Price" class="form-label"></label>
+                <input asp-for="Price" class="form-control" />
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="BaseDiscount" class="form-label"></label>
+                <input asp-for="BaseDiscount" class="form-control" type="number" />
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="StockAmount" class="form-label"></label>
+                <input asp-for="StockAmount" class="form-control" />
+            </div>
+            <div class="form-group row">
+                <label asp-for="Image" class="form-label"></label>
+                <img src="@Model.ImageSource" />
+
+ 
+                <input asp-for="Images" type="file" class="form-control" />
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-3">
+                    <a asp-controller="Products" asp-action="Index" class="btn btn-outline-primary">Back</a>
+                    <input type="submit" value="Submit" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </dl>
+</div>

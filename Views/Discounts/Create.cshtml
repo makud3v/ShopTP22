@@ -1,0 +1,57 @@
+﻿@model ShopTP22.Models.Discounts.DiscountCreateViewModel
+
+<div>
+    <h1>New</h1>
+    <p>Discount</p>
+
+    <dl class="row">
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group row">
+                <div class="col-sm-1">
+                    <label asp-for="Percentage" class="form-label"></label>
+                    <input asp-for="Percentage" class="form-control" type="number" />
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-3">
+                    <label asp-for="ExpireDate" class="form-label"></label>
+                    <input asp-for="ExpireDate" class="form-control" type="date" />
+                </div>
+            </div>
+
+
+            <div class="col-md-5">
+                <div class="form-group row">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Products</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var product in Model.AllProducts)
+                        {
+                            <tr>
+                                <td><label for="Products" class="form-check-label">@product.ListingName</label></td>
+                                <td><input type="checkbox" name="SelectedProducts" id="Products" value="@product.Id" class="form-check-input"></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                </div>
+            </div>
+
+            
+            <div class="form-group row">
+                <div class="col-sm-3">
+                    <a asp-controller="Discounts" asp-action="Index" class="btn btn-outline-primary">Back</a>
+                    <input type="submit" value="Confirm" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </dl>
+</div>
