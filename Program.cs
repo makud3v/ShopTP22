@@ -1,8 +1,14 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using ShopTP22.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddSession();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromHours(12);
+    options.Cookie.Name = ".AspNetCore.Session";
+    options.Cookie.IsEssential = true;
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -12,6 +18,7 @@ builder.Services.AddDbContext<ShopContext>(options => options.UseSqlite(
 
 
 var app = builder.Build();
+app.UseHttpsRedirection();
 app.UseSession();
 
 // Configure the HTTP request pipeline.
