@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ShopTP22")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8693329c3511976868075c651398c692fee204b6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+321c5f78db6ddd0f96ad07fa02e5a9aea6956cdb")]
 [assembly: System.Reflection.AssemblyProductAttribute("ShopTP22")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ShopTP22")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
