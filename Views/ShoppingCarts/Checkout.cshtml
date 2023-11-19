@@ -1,0 +1,61 @@
+﻿@model ShopTP22.Models.ShoppingCarts.Cart
+
+@{
+    double cartTotal = 0.0;
+}
+
+<div class="container text-center">
+    <h1>Checkout</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Amount</th>
+                <th>Item</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+           @foreach(var item in Model.Items)
+            {
+                float discount = (float)item.BaseDiscount;
+                double price = Math.Round((double)item.Price, 2);
+                double discountedPrice = Math.Round((double)(price - (price * (discount / 100))), 2);
+
+                cartTotal += discountedPrice;
+                <tr>
+                    <td>1x</td>
+                    <td>@item.ListingName</td>
+                    <td>
+                        @if(discount > 0)
+                        {
+                            <s>@(price + "$")</s> <strong>@(discountedPrice + "$")</strong>
+                        }
+                        else
+                        {
+                            @(price + "$")
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <br />
+    <div class="container text-center">
+        <h3>Total @cartTotal$</h3>
+
+        <form class="container text-center" method="post">
+            <div class="form-group row">
+                <input type="hidden" name="id" value="@Model.Id" />
+            </div>
+
+            <div class="form-group container w-25">
+                <input type="text" class="form-control" placeholder="Coupon" name="coupon"/>
+            </div>
+            <input asp-controller="ShoppingCarts" asp-action="ApplyCoupon" type="submit" class="btn btn-secondary" value="Apply coupon" />
+        </form>
+        <br />
+        <button class="btn btn-success">Proceed to payment</button>
+    </div>
+</div>

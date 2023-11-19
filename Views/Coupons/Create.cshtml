@@ -1,0 +1,32 @@
+﻿@model ShopTP22.Models.Coupons.Coupon
+
+<div>
+    <h1>New</h1>
+    <p>Coupon</p>
+
+    <dl class="row">
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group row">
+                <label asp-for="Name" class="form-label"></label>
+                <input asp-for="Name" class="form-control" type="text" />
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="Percentage" class="form-label"></label>
+                <input asp-for="Percentage" class="form-control" type="number" />
+            </div>
+
+            <div class="form-group row">
+                <label asp-for="ExpireDate" class="form-label"></label>
+                <input asp-for="ExpireDate" class="form-control" />
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-3">
+                    <a asp-controller="Coupons" asp-action="Index" class="btn btn-outline-primary">Back</a>
+                    <input type="submit" value="Confirm" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </dl>
+</div>

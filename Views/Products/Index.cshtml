@@ -9,16 +9,22 @@
             <th>@Html.DisplayNameFor(m => m.ListingName)</th>
             <th>@Html.DisplayNameFor(m => m.Price)</th>
             <th>@Html.DisplayNameFor(m => m.StockAmount)</th>
+            <th>@Html.DisplayNameFor(m => m.BaseDiscount)</th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach(var product in Model)
         {
+            float discount = (float)product.BaseDiscount;
+            double price = Math.Round((double)product.Price, 2);
+            double discountedPrice = Math.Round((double)(price - (price * (discount / 100))), 2);
+
             <tr>
                 <td>@product.ListingName</td>
-                <td>@product.Price</td>
+                <td>@discountedPrice$ (@price$)</td>
                 <td>@product.StockAmount</td>
+                <td>@product.BaseDiscount%</td>
                 <td>
                     <a asp-controller="Products" asp-action="Edit" asp-route-id="@product.Id" class="btn btn-outline-primary">Edit</a>
                     <a asp-controller="Products" asp-action="Delete" asp-route-id="@product.Id" class="btn btn-outline-danger">Delete</a>

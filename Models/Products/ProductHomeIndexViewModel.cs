@@ -12,6 +12,7 @@ namespace ShopTP22.Models.Products
         public int BaseDiscount { get; set; }
         public int StockAmount { get; set; }
         public byte[] Image { get; set; }
+        public string? ImageSource { get; set; }
 
         public DateTime ListingDate { get; set; }
     }

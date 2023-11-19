@@ -1,0 +1,66 @@
+﻿@model ShopTP22.Models.Products.Product
+
+<div class="container w-50">
+    <h1>@Model.ListingName</h1>
+    <p>@ViewBag.AverageRating *</p>
+
+    <div class="row">
+        <div class="col-md-4">
+            <img class="card-img-top" src=@ViewBag.ImageSource alt="Image">
+        </div>
+
+        <div class="col-md-4">
+            <h2>About this product</h2>
+            <p class="text-justify">@Model.ListingDescription</p>
+
+            <hr />
+            <h2>Price</h2>
+
+            @if (Model.BaseDiscount > 0)
+            {
+                float discount = (float)Model.BaseDiscount;
+                double price = Math.Round((double)Model.Price, 2);
+                double discountedPrice = Math.Round((double)(price - (price * (discount / 100))), 2);
+
+                <s>@price$</s>
+                <h3>@discountedPrice$</h3>
+            }
+            else
+            {
+                <p>@Model.Price$</p>
+            }
+
+
+            <br />
+        </div>
+    </div>
+    <div class="col-md-2">
+        <h2>Rate this product</h2>
+
+        <form method="post">
+            <input type="hidden" name="id" value="@Model.Id" />
+            @for (int r = 0; r < 6; r++)
+            {
+                <label for="r-@r" class="form-check-label">@r</label>
+                <input id="r-@r" type="radio" name="rating" class="form-check-input" value="@r" />
+            }
+
+            <input asp-controller="Products" asp-action="RateProduct" type="submit" class="btn btn-primary" value="Rate"/>
+        </form>
+    </div>
+
+    <div class="row">
+        <p class="text-secondary">@(Model.StockAmount)x items in stock</p>
+        <form method="post">
+            <input type="hidden" name="productId" value="@Model.Id" />
+            @if (Model.StockAmount > 0)
+            {
+                <input asp-controller="ShoppingCarts" asp-action="AddToCart" type="submit" class="btn btn-primary" value="Add to cart" />
+            }
+            else
+            {
+                <button class="btn btn-primary" disabled>Out of stock</button>
+            }
+        </form>
+    </div>
+</div>

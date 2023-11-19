@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using ShopTP22.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSession();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -11,6 +12,7 @@ builder.Services.AddDbContext<ShopContext>(options => options.UseSqlite(
 
 
 var app = builder.Build();
+app.UseSession();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -20,7 +22,13 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-app.UseHttpsRedirection();
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<ShopContext>();
+    context.Database.Migrate();
+}
+y 
+
 app.UseStaticFiles();
 
 app.UseRouting();

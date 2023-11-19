@@ -1,0 +1,35 @@
+﻿@model ShopTP22.Models.ShoppingCarts.Cart
+
+<h1>Shopping cart</h1>
+<p>@(Model.Items?.Count == null ? 0 : Model.Items.Count) items</p>
+
+
+<div class="row">
+        @if (Model.Items != null)
+        {
+            HashSet<KeyValuePair<Guid, string>> images = ViewBag.Images;
+            @foreach (var item in Model.Items)
+            {
+                string imageData = images.FirstOrDefault(p => p.Key == item.Id).Value;
+                    imageData = imageData != null ? imageData : "https://via.placeholder.com/300";
+
+                 <div class="col-md-2">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top" src=@imageData alt="Image">
+                        <div class="card-body text-center">
+                            <h2 class="card-text">@item.Price$</h2>
+                            <p class="card-text">@item.ListingName</p>
+
+                            <form method="post">
+                                <input type="hidden" name="itemId" value="@item.Id" />
+                                <input asp-controller="ShoppingCarts" asp-action="RemoveFromCart" type="submit" class="btn btn-danger" value="Remove from cart" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+
+</div>
+<a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">Back</a>
+<a asp-controller="ShoppingCarts" asp-action="Checkout" asp-route-id="@Model.Id" class="btn btn-primary">Proceed to checkout</a>

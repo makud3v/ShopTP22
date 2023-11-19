@@ -13,15 +13,14 @@ namespace ShopTP22.Models.Products
 
         [DisplayName("Description")]
         public string ListingDescription { get; set; }
-        public float Price { get; set; }
+        public float Price { get; set; } = 1.00f;
 
         [DisplayName("Base discount")]
-        public int BaseDiscount { get; set; }
+        public int BaseDiscount { get; set; } = 0;
 
         [DisplayName("Stock amount")]
-        public int StockAmount { get; set; }
+        public int StockAmount { get; set; } = 100;
         public byte[]? Image { get; set; }
-
 
 
         [DisplayName("Listed at")]

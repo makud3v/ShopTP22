@@ -1,5 +1,6 @@
 ﻿@{
-    bool isInAdminMode = Context.Request.RouteValues["controller"]?.ToString() != "Home";
+    string? controllerName = Context.Request.RouteValues["controller"]?.ToString();
+    bool isInAdminMode = controllerName != "Home" && controllerName != "ShoppingCarts";
 }
 
 
@@ -31,9 +32,6 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Products</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Discounts" asp-action="Index">Discounts</a>
-                            </li>
-                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Coupons" asp-action="Index">Coupons</a>
                             </li>
                         }
@@ -48,9 +46,14 @@
                         }
                         else
                         {
+                            int cartItemCount = ViewBag.CartItemCount == null ? 0 : ViewBag.CartItemCount;
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="ShoppingCarts" asp-action="Index">Cart (@cartItemCount)</a>
+                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Products" asp-action="Index">Admin</a>
-                            </li>                
+                            </li>
                         }
                     </ul>
                 </div>

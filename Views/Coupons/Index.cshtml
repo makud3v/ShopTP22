@@ -1,0 +1,29 @@
+﻿@model IEnumerable<ShopTP22.Models.Coupons.Coupon>
+
+<h1>Coupons</h1>
+<a asp-controller="Coupons" asp-action="Create" class="btn btn-primary">New</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(m => m.Name)</th>
+            <th>@Html.DisplayNameFor(m => m.Percentage)</th>
+            <th>@Html.DisplayNameFor(m => m.ExpireDate)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var coupon in Model)
+        {
+            <tr>
+                <td>@coupon.Name</td>
+                <td>@coupon.Percentage</td>
+                <td>@coupon.ExpireDate</td>
+                 <td>
+                    <a asp-controller="Coupons" asp-action="Edit" asp-route-id="@coupon.Id" class="btn btn-outline-primary">Edit</a>
+                    <a asp-controller="Coupons" asp-action="Delete" asp-route-id="@coupon.Id" class="btn btn-outline-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

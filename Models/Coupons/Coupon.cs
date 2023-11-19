@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace ShopTP22.Models.Coupons
 {
@@ -8,7 +9,9 @@ namespace ShopTP22.Models.Coupons
         public Guid Id { get; set; }
 
         public string Name { get; set; }
+        public int Percentage { get; set; }
 
+        [DisplayName("Expiration date")]
         public DateTime ExpireDate { get; set; }
     }
 }

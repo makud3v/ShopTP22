@@ -7,3 +7,47 @@
 
 <h1>Welcome to my shop</h1>
 <p>The best place for a variety of toilet paper</p>
+<div class="row">
+    @foreach (var product in Model)
+    {
+        string imageData = product.ImageSource != null ? product.ImageSource : "https://via.placeholder.com/300";
+
+
+        <a asp-controller="Home" asp-action="Details" asp-route-id="@product.Id" class="col-md-6 text-decoration-none">
+            <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src=@imageData alt="Image">
+                <div class="card-body text-center">
+                    @if(product.BaseDiscount > 0)
+                    {
+                        float discount = (float)product.BaseDiscount;
+                        double price = Math.Round((double)product.Price, 2);
+                        double discountedPrice = Math.Round((double)(price - (price * (discount / 100))), 2);
+
+                       <s>@price$</s>
+                       <br />
+                       <h2 class="card-text">@discountedPrice$</h2>
+                    }
+                    else
+                    {
+                        <h2 class="card-text">@product.Price$</h2>
+                    }
+                    <p class="card-text">@product.ListingName</p>
+
+
+
+                    <form method="post">
+                        <input type="hidden" name="productId" value="@product.Id" />
+                        @if(product.StockAmount > 0)
+                        {
+                            <input asp-controller="ShoppingCarts" asp-action="AddToCart" type="submit" class="btn btn-primary" value="Add to cart" />
+                        }
+                        else
+                        {
+                            <button class="btn btn-primary" disabled>Out of stock</button>
+                        }
+                    </form>
+                </div>
+            </div>
+        </a>
+    }
+</div>

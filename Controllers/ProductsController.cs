@@ -1,7 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ShopTP22.Data;
 using ShopTP22.Models;
 using ShopTP22.Models.Products;
+using ShopTP22.Models.Ratings;
+using ShopTP22.Models.ShoppingCarts;
 
 namespace ShopTP22.Controllers
 {
@@ -19,7 +22,7 @@ namespace ShopTP22.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            List<ProductAdminIndexViewModel> vm = _context.Products.Select(p => (
+            List<ProductAdminIndexViewModel> vm = _context.Products.Select(p => (            
                 new ProductAdminIndexViewModel()
                 {
                     Id = p.Id,
@@ -155,7 +158,41 @@ namespace ShopTP22.Controllers
             _context.Products.Remove(pr);
             await _context.SaveChangesAsync();
 
+
+            foreach (var item in await _context.CartItems
+                .Where(ci => ci.ProductId == pr.Id)
+                .ToListAsync()
+            )
+            {
+                _context.CartItems.Remove(item);
+                await _context.SaveChangesAsync();
+            }
+
             return RedirectToAction(nameof(Index));
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> RateProduct(Guid id, int rating)
+        {
+            Product? product = await _context.Products
+                .FirstOrDefaultAsync(p => p.Id == id);
+            if (product == null)
+            {
+                return BadRequest("Invalid product when trying to rate");
+            }
+
+            Rating newRating = new()
+            {
+                Id = Guid.NewGuid(),
+                Stars = Math.Clamp(rating, 0, 5),
+                ProductId = id
+            };
+
+            await _context.Ratings.AddAsync(newRating);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index), "Home");
         }
     }
 }

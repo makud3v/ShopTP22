@@ -16,7 +16,7 @@ namespace ShopTP22.Models.Products
 
         public float Price { get; set; }
 
-        [DisplayName("Base discount")]
+        [DisplayName("Discount")]
         public int BaseDiscount { get; set; }
 
         [DisplayName("Stock amount")]

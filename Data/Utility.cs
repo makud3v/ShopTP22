@@ -24,7 +24,8 @@
             if (imageData == null)
                 return null;
 
-            return string.Format("data:image.gif;base64,{0}", Convert.ToBase64String(imageData));
+            string? data = string.Format("data:image.gif;base64,{0}", Convert.ToBase64String(imageData));
+            return data;
         }
     }
 }
