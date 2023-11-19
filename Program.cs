@@ -27,7 +27,6 @@ using (var scope = app.Services.CreateScope())
     var context = scope.ServiceProvider.GetRequiredService<ShopContext>();
     context.Database.Migrate();
 }
-y 
 
 app.UseStaticFiles();
 
