@@ -3,12 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using ShopTP22.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Services.AddSession(options =>
-{
-    options.IdleTimeout = TimeSpan.FromHours(12);
-    options.Cookie.Name = ".AspNetCore.Session";
-    options.Cookie.IsEssential = true;
-});
+builder.Services.AddSession();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

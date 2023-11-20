@@ -4,8 +4,8 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 -->
 <Project>
   <PropertyGroup>
-    <_PublishTargetUrl>C:\Users\makud3v\Development\Coding\Projects\ShopTP22\bin\Release\net6.0\publish\</_PublishTargetUrl>
-    <History>True|2023-11-19T17:21:13.6309181Z;</History>
+    <_PublishTargetUrl>C:\Users\opilane\source\repos\TARpe22\ShopTP22\bin\Release\net6.0\publish\</_PublishTargetUrl>
+    <History>True|2023-11-20T07:54:48.9748933Z;True|2023-11-19T19:21:13.6309181+02:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
 </Project>

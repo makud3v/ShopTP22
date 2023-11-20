@@ -21,6 +21,12 @@ namespace ShopTP22.Controllers
         {
 
             string? sessionId = HttpContext.Request.Cookies[".AspNetCore.Session"];
+            if (sessionId == null)
+            {
+                sessionId = Guid.NewGuid().ToString();
+                HttpContext.Response.Cookies.Append(".AspNetCore.Session", sessionId);
+            }
+
             Cart? shoppingCart = await _context.Carts
                 .Include(c => c.Items)
                 .FirstOrDefaultAsync(c => c.OwnerSessionId == sessionId);
